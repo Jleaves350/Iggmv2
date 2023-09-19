@@ -16,18 +16,10 @@ public class program
     static Mat normalise(Mat image)
     {
         double maxVal, minVal;
-        float val;
         Point minLoc, maxLoc;
         Cv2.MinMaxLoc(image, out minVal, out maxVal, out minLoc, out maxLoc);
         Mat result = new Mat(image.Size(), MatType.CV_32FC1);
-        for (int row = 0; row < image.Rows; row++)
-        {
-            for(int cols=0; cols < image.Cols; cols++)
-            {
-                val = (float) (image.At<Byte>(row, cols) / maxVal);
-                result.At<float>(row,cols) = val;
-            }
-        }
+        Cv2.Divide(image,maxVal, result);
         return result;
     }
     public static List<Point2f> processframe(Mat bef, Mat aft, double angle)//assume bef and aft have same dimension
@@ -48,7 +40,7 @@ public class program
         diff = normalise(diff);
         //IGGM
         double sum1, sum2;
-        float pixval;
+        float pixval,res;
         Mat testimg = new Mat(rows,cols,MatType.CV_8UC1);
         List<Point2f> result = new List<Point2f>();
         for (int j=0; j<cols; j++)
@@ -59,23 +51,29 @@ public class program
             {
              
                 pixval = (float)diff.At<float>(x, j);
-                sum1 += pixval*x;
-                sum2 += pixval;
             }
             if (sum2 == 0)
             {
                 continue;
             }
-            result.Add(new Point2f((float)(sum1 / sum2),j));
-            testimg.At<Byte>((int)(sum1 / sum2),j)= (Byte)255;
+            res = (float)(sum1 / sum2);
+            result.Add(new Point2f(res,j-rows/2));
+            testimg.At<Byte>((int)(res),j)= (Byte)255;
         }
         //output line
         testimg = rotate_frame(testimg, -angle);
         Cv2.Add(diffthres, testimg, testimg);
-        Cv2.ImShow("Out img", testimg);
-        Cv2.WaitKey(0);
+        //Cv2.ImShow("Out img", testimg);
+        //Cv2.WaitKey(0);
         //get height data
+        /*
+        List<Point2f> heights = new List<Point2f>();
+        foreach(Point2f p in result)
+        {
+            heights.Add(new Point2f(p.X, p.Y -(rows/2)));
+        }
         //return
+        */
         return result;
     }
     static void Main(string[] args)
@@ -83,19 +81,10 @@ public class program
         using var img1 = new Mat("C:\\Users\\james\\source\\repos\\Iggmv2\\Iggmv2\\pic1.jpg", ImreadModes.Grayscale);
         using var img2 = new Mat("C:\\Users\\james\\source\\repos\\Iggmv2\\Iggmv2\\pic2.jpg", ImreadModes.Grayscale);
         List<Point2f> bruh = new List<Point2f>();
-        Mat gamer = new Mat(img1.Size(), MatType.CV_8UC1);
-        double test;
-        Stopwatch stopwatch = new Stopwatch();
+        Stopwatch stopwatch= new Stopwatch();
         stopwatch.Start();
         bruh = processframe(img1, img2, 45.0);
         stopwatch.Stop();
-        long elap = stopwatch.ElapsedMilliseconds;
-        Console.WriteLine(elap);
-        foreach(Point2f point in bruh)
-        {
-            gamer.At<Byte>((int)point.X,(int)(point.Y-100))=(Byte)255;
-        }
-        Cv2.ImShow("Balls", gamer);
-        Cv2.WaitKey(0);
+        Console.WriteLine(stopwatch.Elapsed.ToString());
     }
 }
