@@ -51,29 +51,22 @@ public class program
             {
              
                 pixval = (float)diff.At<float>(x, j);
+                sum1+= pixval*x;
+                sum2+= pixval;
             }
             if (sum2 == 0)
             {
                 continue;
             }
             res = (float)(sum1 / sum2);
-            result.Add(new Point2f(res,j-rows/2));
+            result.Add(new Point2f(res,j-rows/2));//where height is gotten from center line
             testimg.At<Byte>((int)(res),j)= (Byte)255;
         }
         //output line
         testimg = rotate_frame(testimg, -angle);
         Cv2.Add(diffthres, testimg, testimg);
-        //Cv2.ImShow("Out img", testimg);
-        //Cv2.WaitKey(0);
-        //get height data
-        /*
-        List<Point2f> heights = new List<Point2f>();
-        foreach(Point2f p in result)
-        {
-            heights.Add(new Point2f(p.X, p.Y -(rows/2)));
-        }
-        //return
-        */
+        Cv2.ImShow("Out img", testimg);
+        Cv2.WaitKey(0);
         return result;
     }
     static void Main(string[] args)
