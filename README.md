@@ -20,7 +20,8 @@ C_P(x_p,y_p)=(j,\sum_{j=1}^{M} I_n(i,j)*i/\sum_{j=1}^{M}I_n(i,j)).
 The optimisation performed allows this code to run quicker than the IGGM in (Yuehua Li, 2017) while retaining the sub-pixel accuracy. Using the images above as inputs the code outputs sub-pixel values
 for the centre point, rouding the values to integers it produces this centre line (overlapped onto the laser line).
 
-![12](https://github.com/Jleaves350/Iggmv2/assets/9415271/0d2fbe76-cc7c-4b46-93c9-a7aa682e1a80)
+![12](https://github.com/Jleaves350/Iggmv2/assets/9415271/375c169b-ff8e-4cf6-86c9-b397042ab86b)
+
 
 
 Li, Y.; Zhou, J.; Huang, F.; Liu, L. Sub-Pixel Extraction of Laser Stripe Center Using an Improved Gray-Gravity Method †. Sensors 2017, 17, 814. https://doi.org/10.3390/s17040814
