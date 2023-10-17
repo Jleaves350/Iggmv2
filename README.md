@@ -1,13 +1,13 @@
 # Iggmv2
 This program is for Sub-pixel alser line extraction. It uses a improved Gray-Gravity method (Yuehua Li, 2017).
 The program is designed to run in realtime and be integrated into the unity devlopment. This program takes an input of 2 grayscale images (shown here in colour), one with a laser line, one without.
-![WIN_20230319_07_52_24_Pro](https://github.com/Jleaves350/Iggmv2/assets/9415271/330777cf-e35b-499d-ba47-b6283a8dc0f0)
-![WIN_20230319_07_52_45_Pro](https://github.com/Jleaves350/Iggmv2/assets/9415271/e2689943-2af8-4dd1-b93e-b1c3b8fa9bca)
+![WIN_20230319_07_52_45_Pro](https://github.com/Jleaves350/Iggmv2/assets/9415271/42af03b2-db6e-4e0b-b392-b2a3ee7fa9a5)
+![WIN_20230319_07_52_24_Pro](https://github.com/Jleaves350/Iggmv2/assets/9415271/e085d640-47d5-4a9c-8b59-2fce332f783d)
 It then uses the OpenCv library (wrapped to c#) to find the difference between the images essentially extracting a highly defined laser line (insert image)
 This code is designed to run on an arm that can move in the x-y plane with a fixed camera and a fixed laser source. This allows me to simply the algorithm in (Yuehua Li, 2017) further.
 In the original IGGM (Improved Gray-gravity method) the authors call for summing the gray intensity of pixels along an orthogonal line to a rectangular search section shown below.
 
-![sensors-17-00814-g001-550](https://github.com/Jleaves350/Iggmv2/assets/9415271/e07d55c1-0d5d-4908-a41c-db4cc3841dd5) (Yuehua Li, 2017).
+ ![sensors-17-00814-g001-550](https://github.com/Jleaves350/Iggmv2/assets/9415271/04249fac-8a05-4bb2-bf2d-3ac3cd293665)(Yuehua Li, 2017).
 
 This would add signifigant complexity to my program and increase the execute time. So in order to reduce the time complexitiy I recognised that in the case of a fixed laser
 beam accross a pcb there would be no signifigant radius of curvature introduced by the laser line being displaced by a component on the pcb. Therefore it is essentially a step function at points where
