@@ -24,4 +24,8 @@ for the centre point, rouding the values to integers it produces this centre lin
 
 
 
+https://github.com/Jleaves350/Iggmv2/assets/9415271/52779e75-b379-493e-bbe8-c7cb38aa9fca
+
+
+
 Li, Y.; Zhou, J.; Huang, F.; Liu, L. Sub-Pixel Extraction of Laser Stripe Center Using an Improved Gray-Gravity Method †. Sensors 2017, 17, 814. https://doi.org/10.3390/s17040814
